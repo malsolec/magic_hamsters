@@ -63,9 +63,7 @@ public class ActionActivity extends AppCompatActivity {
         }
         else{
             KidActivityRepository.setKidActivityIsDone(this.getApplicationContext(), kidActivityId, true);
-            getIntent().setAction(null);
-            Intent intent = new Intent(ActionActivity.this, MainActivity.class);
-            ActionActivity.this.startActivity(intent);
+            finish();
         }
 
     }

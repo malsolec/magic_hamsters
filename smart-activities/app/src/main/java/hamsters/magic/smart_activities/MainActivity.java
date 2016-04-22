@@ -156,5 +156,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshActivities() {
         KidActivityRepository.undoneAllKidActivities(this.getApplicationContext());
+        final ListView activityListView  = (ListView) findViewById(R.id.activities_list);
+        kidActivityListAdapter = new KidActivityListAdapter(this.getApplicationContext());
+        activityListView.setAdapter(kidActivityListAdapter);
     }
 }
