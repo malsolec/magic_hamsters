@@ -47,7 +47,7 @@ public class KidActivityRepository {
         DaoSession daoSession = Utils.getDaoSession(context);
         KidActivityDao kidActivityDao = daoSession.getKidActivityDao();
         QueryBuilder qb = kidActivityDao.queryBuilder();
-        qb.join(NFCDeviceDao.Properties.KidActivityId, NFCDevice.class)
+        qb.join(NFCDevice.class, NFCDeviceDao.Properties.KidActivityId)
                 .where(NFCDeviceDao.Properties.DeviceId.eq(deviceId));
         List<KidActivity> kidActivities = qb.list();
         if(!kidActivities.isEmpty())
