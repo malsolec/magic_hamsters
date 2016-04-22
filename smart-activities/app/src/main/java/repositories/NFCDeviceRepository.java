@@ -25,6 +25,7 @@ import java.util.List;
 import database.Action;
 import database.ActionDao;
 import database.DaoSession;
+import database.KidActivity;
 import database.NFCDevice;
 import database.NFCDeviceDao;
 import de.greenrobot.dao.query.QueryBuilder;
@@ -46,5 +47,15 @@ public class NFCDeviceRepository {
         if(!nfcDevices.isEmpty())
             return nfcDevices.get(0);
         return null;
+    }
+
+    public static void insertNfcDeviceFromModel(Context context, List<ManagerNFCDevice> nfcDevices) {
+        DaoSession daoSession = Utils.getDaoSession(context);
+        NFCDeviceDao nfcDeviceDao = daoSession.getNFCDeviceDao();
+        for(ManagerNFCDevice nfcDevice :  nfcDevices) {
+            NFCDevice newNfcDevice = Utils.createNFCDevice(nfcDevice.getDeviceId(), nfcDevice.getKidActivityId());
+            newNfcDevice.setId(newNfcDevice.getId());
+            nfcDeviceDao.insertOrReplace(newNfcDevice);
+        }
     }
 }

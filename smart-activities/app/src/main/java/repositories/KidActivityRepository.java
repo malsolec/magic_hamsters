@@ -77,4 +77,16 @@ public class KidActivityRepository {
             return kidActivities.get(0);
         return null;
     }
+
+    public static void insertKidActivitiesFromModel(Context context, List<ManagerKidActivity> kidActivities) {
+        DaoSession daoSession = Utils.getDaoSession(context);
+        KidActivityDao kidActivityDao = daoSession.getKidActivityDao();
+
+        for(ManagerKidActivity kidActivity : kidActivities){
+            KidActivity newKidActivity = Utils.createKidActivity(kidActivity.getName(), kidActivity.getImgUrl(), kidActivity.getOrderNumber());
+            newKidActivity.setId(kidActivity.getId());
+            kidActivityDao.insertOrReplace(newKidActivity);
+        }
+
+    }
 }

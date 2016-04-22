@@ -43,5 +43,13 @@ public class ActionRepository {
         return qb.list();
     }
 
-
+    public static void insertActionsFromModel(Context context, List<ManagerAction> actions) {
+        DaoSession daoSession = Utils.getDaoSession(context);
+        ActionDao actionDao = daoSession.getActionDao();
+        for(ManagerAction action : actions){
+            Action newAction = Utils.createAction(action.getName(), action.getImgUrl(), action.getOrderNumber(), action.getKidActivityId());
+            newAction.setId(action.getId());
+            actionDao.insertOrReplace(newAction);
+        }
+    }
 }
