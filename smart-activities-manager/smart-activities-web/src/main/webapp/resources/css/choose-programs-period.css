@@ -1,0 +1,76 @@
+.b-main-content .search-bar {
+    width: 445px;
+    height: 24px;
+    margin-left: 20px;
+}
+
+.b-main-content .search-icon {
+    height: 23px;
+    width: 23px;
+}
+
+.b-main-content .b-left-tabview-top {
+    position: relative;
+    top: 120px;
+    margin-left: 10px;
+}
+
+.b-main-content .b-right-tabview-top {
+    position: relative;
+    bottom: 100px;
+    left: 530px;
+    max-width: 600px;
+}
+
+.b-main-content .b-tabview-left {
+    width: 680px;
+    position: relative;
+    bottom: 80px;
+}
+
+.b-main-content .b-tabview-right {
+    width: 600px;
+    height: 500px;
+    position: relative;
+    bottom: 512px;
+    left: 700px;
+}
+
+.b-main-content .kid-table-with-programs-container {
+    margin: 5px;
+}
+
+.b-main-content .kid-table-with-programs-container table {
+    width: auto !important;
+}
+
+.b-main-content .kid-table-with-programs-container tr {
+    background-color: rgb(255, 217, 158);
+}
+
+.b-main-content .kid-table-with-programs-container .checkbox-cell div {
+    margin: 2px;
+}
+
+.b-main-content .edit-icon {
+    height: 30px;
+    width: 23px;
+    margin-left: 2px;
+    margin-right: 5px;
+}
+
+.b-main-content .trash-icon {
+    height: 30px;
+    width: 30px;
+    margin-left: 5px;
+    margin-right: 2px;
+}
+
+/*.data-choose-container td {*/
+    /*padding: 5px !important;*/
+/*}*/
+
+/*.data-choose-panel.ui-panelgrid>*>tr,*/
+/*.data-choose-panel.ui-panelgrid .ui-panelgrid-cell {*/
+    /*border: none;*/
+/*}*/
