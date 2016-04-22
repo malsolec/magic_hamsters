@@ -1,17 +1,27 @@
 package nfc;
 
+import android.content.Context;
 import android.nfc.Tag;
 import android.os.AsyncTask;
+
+import database.KidActivity;
+import repositories.KidActivityRepository;
 
 /**
  * Created by wookie on 4/22/16.
  */
-public class NdefReaderTask extends AsyncTask<Tag, Void, String> {
+public class NdefReaderTask extends AsyncTask<Tag, Void, Integer> {
+
+    private Context context;
+
+    public NdefReaderTask(Context context) {
+        this.context = context;
+    }
 
     @Override
-    protected String doInBackground(Tag... params) {
+    protected Integer doInBackground(Tag... params) {
         Tag tag = params[0];
-        return countTagId(tag).toString();
+        return countTagId(tag);
     }
 
     private Integer countTagId(Tag tag) {
@@ -23,7 +33,7 @@ public class NdefReaderTask extends AsyncTask<Tag, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        // TODO: run new activity
+    protected void onPostExecute(Integer result) {
+        KidActivity detectedActivity = KidActivityRepository.getKidActivityByNFCDeviceId(context, result);
     }
 }

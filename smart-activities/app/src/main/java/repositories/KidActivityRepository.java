@@ -25,6 +25,7 @@ import java.util.List;
 import database.DaoSession;
 import database.KidActivity;
 import database.KidActivityDao;
+import database.NFCDevice;
 import database.NFCDeviceDao;
 import de.greenrobot.dao.query.QueryBuilder;
 
@@ -42,12 +43,15 @@ public class KidActivityRepository {
         return kidActivityDao.loadAll();
     }
 
-    public static List<KidActivity> getKidActivitiesByNFCDeviceId(Context context, Integer deviceId) {
+    public static KidActivity getKidActivityByNFCDeviceId(Context context, Integer deviceId) {
         DaoSession daoSession = Utils.getDaoSession(context);
         KidActivityDao kidActivityDao = daoSession.getKidActivityDao();
         QueryBuilder qb = kidActivityDao.queryBuilder();
         qb.join(NFCDeviceDao.Properties.KidActivityId, KidActivity.class);
         qb.where(NFCDeviceDao.Properties.DeviceId.eq(deviceId));
-        return qb.list();
+        List<KidActivity> kidActivities = qb.list();
+        if(!kidActivities.isEmpty())
+            return kidActivities.get(0);
+        return null;
     }
 }
