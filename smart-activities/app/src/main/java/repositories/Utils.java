@@ -24,9 +24,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.Action;
+import database.ActionDao;
 import database.DaoMaster;
 import database.DaoSession;
 import database.KidActivity;
+import database.KidActivityDao;
+import database.NFCDevice;
+import database.NFCDeviceDao;
 
 public class Utils {
 
@@ -44,24 +49,36 @@ public class Utils {
         daoSession.getKidActivityDao().deleteAll();
     }
 
-//    public static void setUpExamples(Context context){
-//        List<KidActivity> kidActivities = new ArrayList<>();
-//
-//        kidActivities.add();
-//
-//        List<Child> childList = new ArrayList<>();
-//        ChildDao childDao = getDaoSession(context).getChildDao();
-//        for(int childId = 0; childId< numberOfChildren; childId++)
-//        {
-//            Child child = new Child();
-//            child.setCode(code + childId);
-//            child.setIsArchived(false);
-//            childDao.insertOrReplace(child);
-//            childList.add(child);
-//
-//        }
-//        return childList;
-//    }
+    public static void setUpExamples(Context context){
+        List<KidActivity> kidActivities = new ArrayList<>();
+        List<NFCDevice> nfcDevices = new ArrayList<>();
+        List<Action> actions = new ArrayList<>();
+        KidActivityDao kidActivityDao = getDaoSession(context).getKidActivityDao();
+        NFCDeviceDao nfcDeviceDao = getDaoSession(context).getNFCDeviceDao();
+        ActionDao actionDao = getDaoSession(context).getActionDao();
+
+
+        kidActivities.add(createKidActivity("Mycie zębów", "./img/mycie_zebow.jpg", 1));
+        kidActivities.add(createKidActivity("Zabawa z misiem", "./img/zabawa_z_misiem.jpg", 2));
+
+        for (KidActivity kidActivity : kidActivities) {
+            kidActivityDao.insertOrReplace(kidActivity);
+        }
+
+
+        nfcDevices.add(createNFCDevice("ABC", kidActivities.get(0).getId()));
+        nfcDevices.add(createNFCDevice("DEF", kidActivities.get(1).getId()));
+
+        for (NFCDevice nfcDevice : nfcDevices) {
+            nfcDeviceDao.insertOrReplace(nfcDevice);
+        }
+
+        actions.add(createAction("Czynność 1", "./img/czynnosc_1", 1, kidActivities.get(0).getId()));
+
+        for (Action action : actions) {
+            actionDao.insertOrReplace(action);
+        }
+    }
 
     public static KidActivity createKidActivity(String name, String imgUrl, Integer orderNumber) {
         KidActivity kidActivity = new KidActivity();
@@ -69,5 +86,21 @@ public class Utils {
         kidActivity.setImgUrl(imgUrl);
         kidActivity.setOrderNumber(orderNumber);
         return kidActivity;
+    }
+
+    public static NFCDevice createNFCDevice(String deviceId, Long kidActivityId) {
+        NFCDevice nfcDevice = new NFCDevice();
+        nfcDevice.setDeviceId(deviceId);
+        nfcDevice.setKidActivityId(kidActivityId);
+        return nfcDevice;
+    }
+
+    public static Action createAction(String name, String imgUrl, Integer orderNumber, Long kidActivityId) {
+        Action action = new Action();
+        action.setName(name);
+        action.setImgUrl(imgUrl);
+        action.setOrderNumber(orderNumber);
+        action.setKidActivityId(kidActivityId);
+        return action;
     }
 }
