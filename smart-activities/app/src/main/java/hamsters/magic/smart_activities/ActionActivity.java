@@ -61,9 +61,7 @@ public class ActionActivity extends AppCompatActivity {
             getWindow().getDecorView().findViewById(android.R.id.content).invalidate();
         }
         else{
-            getIntent().setAction(null);
-            Intent intent = new Intent(ActionActivity.this, MainActivity.class);
-            ActionActivity.this.startActivity(intent);
+            finish();
         }
 
     }
