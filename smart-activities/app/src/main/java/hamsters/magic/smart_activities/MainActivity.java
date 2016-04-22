@@ -35,6 +35,7 @@ import database.KidActivity;
 public class MainActivity extends AppCompatActivity {
 
     private NfcAdapter mNfcAdapter;
+    private KidActivityListAdapter kidActivityListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpActivitiesListContent() {
         final ListView activityListView  = (ListView) findViewById(R.id.activities_list);
-        KidActivityListAdapter kidActivityListAdapter = new KidActivityListAdapter(this.getApplicationContext());
+        kidActivityListAdapter = new KidActivityListAdapter(this.getApplicationContext());
         activityListView.setAdapter(kidActivityListAdapter);
 
         activityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,14 +105,14 @@ public class MainActivity extends AppCompatActivity {
             String type = intent.getType();
             if (NfcConstants.MIME_TEXT_PLAIN.equals(type)) {
                 Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                new NdefReaderTask(MainActivity.this.getApplicationContext()).execute(tag);
+                new NdefReaderTask(MainActivity.this.getApplicationContext(), kidActivityListAdapter.getItem(0)).execute(tag);
             } else {
                 Log.d(NfcConstants.TAG, "Wrong mime type: " + type);
             }
         } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action) || NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
             // In case we would still use the Tech Discovered Intent
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            new NdefReaderTask(MainActivity.this.getApplicationContext()).execute(tag);
+            new NdefReaderTask(MainActivity.this.getApplicationContext(), kidActivityListAdapter.getItem(0)).execute(tag);
         }
     }
 

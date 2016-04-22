@@ -1,10 +1,13 @@
 package nfc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.AsyncTask;
 
 import database.KidActivity;
+import hamsters.magic.smart_activities.ActionActivity;
+import hamsters.magic.smart_activities.MainActivity;
 import repositories.KidActivityRepository;
 
 /**
@@ -13,9 +16,11 @@ import repositories.KidActivityRepository;
 public class NdefReaderTask extends AsyncTask<Tag, Void, Integer> {
 
     private Context context;
+    private KidActivity topActivity;
 
-    public NdefReaderTask(Context context) {
+    public NdefReaderTask(Context context, KidActivity topActivity) {
         this.context = context;
+        this.topActivity = topActivity;
     }
 
     @Override
@@ -35,5 +40,13 @@ public class NdefReaderTask extends AsyncTask<Tag, Void, Integer> {
     @Override
     protected void onPostExecute(Integer result) {
         KidActivity detectedActivity = KidActivityRepository.getKidActivityByNFCDeviceId(context, result);
+
+        if(detectedActivity.getId().equals(topActivity.getId())) {
+            Intent intent = new Intent(context, ActionActivity.class);
+            intent.putExtra("ACTIVITY_ID", detectedActivity.getId());
+            context.startActivity(intent);
+        } else {
+            // TODO: wrong nfc tag
+        }
     }
 }
