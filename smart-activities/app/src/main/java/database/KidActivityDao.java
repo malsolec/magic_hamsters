@@ -27,6 +27,7 @@ public class KidActivityDao extends AbstractDao<KidActivity, Long> {
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property ImgUrl = new Property(2, String.class, "imgUrl", false, "IMG_URL");
         public final static Property OrderNumber = new Property(3, Integer.class, "orderNumber", false, "ORDER_NUMBER");
+        public final static Property IsDone = new Property(4, Boolean.class, "isDone", false, "IS_DONE");
     };
 
 
@@ -45,7 +46,8 @@ public class KidActivityDao extends AbstractDao<KidActivity, Long> {
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
                 "'NAME' TEXT," + // 1: name
                 "'IMG_URL' TEXT," + // 2: imgUrl
-                "'ORDER_NUMBER' INTEGER);"); // 3: orderNumber
+                "'ORDER_NUMBER' INTEGER," + // 3: orderNumber
+                "'IS_DONE' INTEGER);"); // 4: isDone
     }
 
     /** Drops the underlying database table. */
@@ -78,6 +80,11 @@ public class KidActivityDao extends AbstractDao<KidActivity, Long> {
         if (orderNumber != null) {
             stmt.bindLong(4, orderNumber);
         }
+ 
+        Boolean isDone = entity.getIsDone();
+        if (isDone != null) {
+            stmt.bindLong(5, isDone ? 1l: 0l);
+        }
     }
 
     /** @inheritdoc */
@@ -93,7 +100,8 @@ public class KidActivityDao extends AbstractDao<KidActivity, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // imgUrl
-            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3) // orderNumber
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // orderNumber
+            cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0 // isDone
         );
         return entity;
     }
@@ -105,6 +113,7 @@ public class KidActivityDao extends AbstractDao<KidActivity, Long> {
         entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setImgUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setOrderNumber(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setIsDone(cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0);
      }
     
     /** @inheritdoc */

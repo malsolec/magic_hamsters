@@ -10,6 +10,7 @@ public class KidActivity {
     private String name;
     private String imgUrl;
     private Integer orderNumber;
+    private Boolean isDone;
 
     public KidActivity() {
     }
@@ -18,11 +19,12 @@ public class KidActivity {
         this.id = id;
     }
 
-    public KidActivity(Long id, String name, String imgUrl, Integer orderNumber) {
+    public KidActivity(Long id, String name, String imgUrl, Integer orderNumber, Boolean isDone) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
         this.orderNumber = orderNumber;
+        this.isDone = isDone;
     }
 
     public Long getId() {
@@ -55,6 +57,14 @@ public class KidActivity {
 
     public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public Boolean getIsDone() {
+        return isDone;
+    }
+
+    public void setIsDone(Boolean isDone) {
+        this.isDone = isDone;
     }
 
 }

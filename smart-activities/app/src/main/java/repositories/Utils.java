@@ -97,6 +97,7 @@ public class Utils {
         kidActivity.setName(name);
         kidActivity.setImgUrl(imgUrl);
         kidActivity.setOrderNumber(orderNumber);
+        kidActivity.setIsDone(false);
         return kidActivity;
     }
 

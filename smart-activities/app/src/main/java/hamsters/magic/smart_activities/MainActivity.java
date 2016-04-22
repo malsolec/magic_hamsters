@@ -31,6 +31,7 @@ import java.util.List;
 
 import database.Action;
 import database.KidActivity;
+import repositories.KidActivityRepository;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 KidActivity selectedAction = (KidActivity) activityListView.getAdapter().getItem(position);
                 intent.putExtra("ACTIVITY_ID", selectedAction.getId());
                 MainActivity.this.startActivity(intent);
-            }});
+            }
+        });
     }
 
     private void initNfcAdapter() {
@@ -121,7 +123,8 @@ public class MainActivity extends AppCompatActivity {
 
         final PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, intent, 0);
 
-        adapter.enableForegroundDispatch(activity, pendingIntent, null, null);
+        if (adapter != null)
+            adapter.enableForegroundDispatch(activity, pendingIntent, null, null);
     }
 
     public static void stopForegroundDispatch(final Activity activity, NfcAdapter adapter) {
@@ -143,10 +146,14 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        if (id == R.id.action_refresh) {
+            refreshActivities();
+        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshActivities() {
+        KidActivityRepository.undoneAllKidActivities(this.getApplicationContext());
     }
 }

@@ -43,6 +43,28 @@ public class KidActivityRepository {
         return kidActivityDao.loadAll();
     }
 
+    public static List<KidActivity> getAllNotDoneKidsActivities(Context context) {
+        DaoSession daoSession = Utils.getDaoSession(context);
+        KidActivityDao kidActivityDao = daoSession.getKidActivityDao();
+        QueryBuilder qb = kidActivityDao.queryBuilder();
+        qb.where(KidActivityDao.Properties.IsDone.eq(false));
+        return qb.list();
+    }
+
+    public static void setKidActivityIsDone(Context context, KidActivity kidActivity, boolean isDone) {
+        DaoSession daoSession = Utils.getDaoSession(context);
+        kidActivity.setIsDone(isDone);
+        KidActivityDao kidActivityDao = daoSession.getKidActivityDao();
+        kidActivityDao.update(kidActivity);
+    }
+
+    public static void undoneAllKidActivities(Context context) {
+        List<KidActivity> kidActivities = getAllKidsActivities(context);
+        for(KidActivity kidActivity : kidActivities) {
+            setKidActivityIsDone(context, kidActivity, false);
+        }
+    }
+
     public static KidActivity getKidActivityByNFCDeviceId(Context context, Integer deviceId) {
         DaoSession daoSession = Utils.getDaoSession(context);
         KidActivityDao kidActivityDao = daoSession.getKidActivityDao();

@@ -31,7 +31,7 @@ public class KidActivityListAdapter extends ArrayAdapter<KidActivity> {
     public KidActivityListAdapter(Context context){
         super(context, -1, new ArrayList<KidActivity>());
         this.context = context;
-        this.kidActivityList = KidActivityRepository.getAllKidsActivities(context);
+        this.kidActivityList = KidActivityRepository.getAllNotDoneKidsActivities(context);
     }
 
     @Override
