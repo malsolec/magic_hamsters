@@ -21,8 +21,12 @@ package repositories;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import database.DaoMaster;
 import database.DaoSession;
+import database.KidActivity;
 
 public class Utils {
 
@@ -31,5 +35,39 @@ public class Utils {
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
         return daoMaster.newSession();
+    }
+
+    public static void cleanUpDatabase(Context context) {
+        DaoSession daoSession = getDaoSession(context);
+        daoSession.getActionDao().deleteAll();
+        daoSession.getNFCDeviceDao().deleteAll();
+        daoSession.getKidActivityDao().deleteAll();
+    }
+
+//    public static void setUpExamples(Context context){
+//        List<KidActivity> kidActivities = new ArrayList<>();
+//
+//        kidActivities.add();
+//
+//        List<Child> childList = new ArrayList<>();
+//        ChildDao childDao = getDaoSession(context).getChildDao();
+//        for(int childId = 0; childId< numberOfChildren; childId++)
+//        {
+//            Child child = new Child();
+//            child.setCode(code + childId);
+//            child.setIsArchived(false);
+//            childDao.insertOrReplace(child);
+//            childList.add(child);
+//
+//        }
+//        return childList;
+//    }
+
+    public static KidActivity createKidActivity(String name, String imgUrl, Integer orderNumber) {
+        KidActivity kidActivity = new KidActivity();
+        kidActivity.setName(name);
+        kidActivity.setImgUrl(imgUrl);
+        kidActivity.setOrderNumber(orderNumber);
+        return kidActivity;
     }
 }
