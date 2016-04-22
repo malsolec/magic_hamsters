@@ -58,22 +58,34 @@ public class Utils {
         ActionDao actionDao = getDaoSession(context).getActionDao();
 
 
-        kidActivities.add(createKidActivity("Mycie zębów", "abc.png", 1));
-        kidActivities.add(createKidActivity("Zabawa z misiem", "abc.png", 2));
+        kidActivities.add(createKidActivity("Mycie zębów", "szczoteczka", 1));
+        kidActivities.add(createKidActivity("Zabawa z misiem", "mis", 2));
 
         for (KidActivity kidActivity : kidActivities) {
             kidActivityDao.insertOrReplace(kidActivity);
         }
 
 
-        nfcDevices.add(createNFCDevice("ABC", kidActivities.get(0).getId()));
-        nfcDevices.add(createNFCDevice("DEF", kidActivities.get(1).getId()));
+        nfcDevices.add(createNFCDevice(28, kidActivities.get(0).getId()));
+        nfcDevices.add(createNFCDevice(4, kidActivities.get(1).getId()));
 
         for (NFCDevice nfcDevice : nfcDevices) {
             nfcDeviceDao.insertOrReplace(nfcDevice);
         }
 
-        actions.add(createAction("Czynność 1", "./img/czynnosc_1", 1, kidActivities.get(0).getId()));
+        actions.add(createAction("Weź szczoteczkę", "szczoteczka", 1, kidActivities.get(0).getId()));
+        actions.add(createAction("Nałóż pastę", "szczoteczka", 2, kidActivities.get(0).getId()));
+        actions.add(createAction("Szczotkuj zęby", "szczoteczka", 3, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypluj pastę", "szczoteczka", 4, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypłucz usta", "szczoteczka", 5, kidActivities.get(0).getId()));
+        actions.add(createAction("Umyj i odłóż szczoteczkę", "szczoteczka", 6, kidActivities.get(0).getId()));
+
+        actions.add(createAction("Zapytaj misia: czy dobrze się czujesz?", "mis", 1, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: boli mnie łapka", "mis", 2, kidActivities.get(1).getId()));
+        actions.add(createAction("Przyklej misiowi plaster", "mis", 3, kidActivities.get(1).getId()));
+        actions.add(createAction("Zapytaj misia: czy teraz jest lepiej?", "mis", 4, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: Tak. Dziękuję.", "mis", 5, kidActivities.get(1).getId()));
+        actions.add(createAction("Przytul misia", "mis", 6, kidActivities.get(1).getId()));
 
         for (Action action : actions) {
             actionDao.insertOrReplace(action);
@@ -88,7 +100,7 @@ public class Utils {
         return kidActivity;
     }
 
-    public static NFCDevice createNFCDevice(String deviceId, Long kidActivityId) {
+    public static NFCDevice createNFCDevice(Integer deviceId, Long kidActivityId) {
         NFCDevice nfcDevice = new NFCDevice();
         nfcDevice.setDeviceId(deviceId);
         nfcDevice.setKidActivityId(kidActivityId);

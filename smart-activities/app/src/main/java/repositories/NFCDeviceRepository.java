@@ -37,7 +37,7 @@ public class NFCDeviceRepository {
         return nfcDeviceDao.load(nfcDeviceId);
     }
 
-    public static NFCDevice getNFCDeviceByDeviceId(Context context, String deviceId) {
+    public static NFCDevice getNFCDeviceByDeviceId(Context context, Integer deviceId) {
         DaoSession daoSession = Utils.getDaoSession(context);
         NFCDeviceDao nfcDeviceDao = daoSession.getNFCDeviceDao();
         QueryBuilder qb = nfcDeviceDao.queryBuilder();

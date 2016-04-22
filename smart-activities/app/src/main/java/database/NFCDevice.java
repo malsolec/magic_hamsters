@@ -10,7 +10,7 @@ import de.greenrobot.dao.DaoException;
 public class NFCDevice {
 
     private Long id;
-    private String deviceId;
+    private Integer deviceId;
     private Long kidActivityId;
 
     /** Used to resolve relations */
@@ -30,7 +30,7 @@ public class NFCDevice {
         this.id = id;
     }
 
-    public NFCDevice(Long id, String deviceId, Long kidActivityId) {
+    public NFCDevice(Long id, Integer deviceId, Long kidActivityId) {
         this.id = id;
         this.deviceId = deviceId;
         this.kidActivityId = kidActivityId;
@@ -50,11 +50,11 @@ public class NFCDevice {
         this.id = id;
     }
 
-    public String getDeviceId() {
+    public Integer getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(String deviceId) {
+    public void setDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
     }
 
