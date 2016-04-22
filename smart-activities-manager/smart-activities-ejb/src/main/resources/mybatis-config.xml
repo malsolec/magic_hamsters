@@ -5,7 +5,9 @@
 <configuration>
     <properties resource="jdbc.properties" />
     <typeAliases>
-
+        <typeAlias type="com.smartactivities.ManagerAction" alias="ManagerAction"/>
+        <typeAlias type="com.smartactivities.ManagerKidActivity" alias="ManagerKidActivity"/>
+        <typeAlias type="com.smartactivities.ManagerNFCDevice" alias="ManagerNFCDevice"/>
     </typeAliases>
 
     <environments default="development">
@@ -21,6 +23,8 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/magic_hamsters/mappers/mapper.xml"/>
+        <mapper resource="com/magic_hamsters/mappers/ManagerActionMapper"/>
+        <mapper resource="com/magic_hamsters/mappers/ManagerKidActivityMapper.xml"/>
+        <mapper resource="com/magic_hamsters/mappers/ManagerNFCDeviceMapper.xml"/>
     </mappers>
 </configuration>

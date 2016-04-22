@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ManagerKidActivityMapper">
+
+    <resultMap id="managerKidActivityResult" type="ManagerKidActivity">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="imgUrl" column="img_url"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="isDone" column="is_done"/>
+    </resultMap>
+
+    <select id="selectAllManagerKidActivities" resultMap="managerKidActivityResult">
+        SELECT *
+        FROM manager_kid_activity
+    </select>
+
+    <select id="selectAllManagerKidActivityById" resultMap="managerKidActivityResult">
+        SELECT *
+        FROM manager_kid_activity
+        WHERE id = #{value}
+    </select>
+
+    <insert id="insertManagerKidActivity" parameterType="ManagerKidActivity">
+        INSERT INTO manager_kid_activity (name, img_url, order_number, is_done)
+        VALUES (#{name}, #{imgUrl}, #{orderNumber}, #{isDone})
+
+        <selectKey order="AFTER" keyProperty="id" resultType="int" >
+            SELECT currval('manager_kid_activity_id_seq');
+        </selectKey>
+    </insert>
+
+    <delete id="deleteManagerKidActivity" parameterType="ManagerKidActivity">
+        DELETE FROM manager_kid_activity
+        WHERE id = #{id}
+    </delete>
+    
+</mapper>

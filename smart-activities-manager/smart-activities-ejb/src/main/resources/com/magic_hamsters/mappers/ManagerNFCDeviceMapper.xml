@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ManagerNFCDeviceMapper">
+
+    <resultMap id="managerNFCDeviceResult" type="ManagerNFCDevice">
+        <result property="id" column="id"/>
+        <result property="deviceId" column="device_id"/>
+        <result property="kidActivityId" column="kid_activity_id"/>
+    </resultMap>
+
+    <select id="selectAllManagerNFCDevices" resultMap="managerNFCDeviceResult">
+        SELECT *
+        FROM manager_nfc_device
+    </select>
+
+    <select id="selectManagerNFCDeviceById" resultMap="managerNFCDeviceResult">
+        SELECT *
+        FROM manager_nfc_device
+        WHERE id = #{value}
+    </select>
+
+    <insert id="insertManagerNFCDevice" parameterType="ManagerNFCDevice">
+        INSERT INTO manager_nfc_device (device_id, kid_activity_id)
+        VALUES (#{deviceId}, #{kidActivityId})
+
+        <selectKey order="AFTER" keyProperty="id" resultType="int" >
+            SELECT currval('manager_nfc_device_id_seq');
+        </selectKey>
+    </insert>
+
+    <delete id="deleteManagerNFCDevice" parameterType="ManagerNFCDevice">
+        DELETE FROM manager_nfc_device
+        WHERE id = #{id}
+    </delete>
+    
+</mapper>
