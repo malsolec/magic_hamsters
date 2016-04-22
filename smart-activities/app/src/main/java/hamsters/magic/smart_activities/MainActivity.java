@@ -45,14 +45,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setUpActivitiesListContent();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         initNfcAdapter();
         handleIntent(getIntent());
@@ -87,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setupForegroundDispatch(this, mNfcAdapter);
+        handleActivitiesListBehaviour();
     }
 
     @Override
@@ -156,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshActivities() {
         KidActivityRepository.undoneAllKidActivities(this.getApplicationContext());
+        handleActivitiesListBehaviour();
+    }
+
+    private void handleActivitiesListBehaviour() {
         final ListView activityListView  = (ListView) findViewById(R.id.activities_list);
         kidActivityListAdapter = new KidActivityListAdapter(this.getApplicationContext());
         activityListView.setAdapter(kidActivityListAdapter);
