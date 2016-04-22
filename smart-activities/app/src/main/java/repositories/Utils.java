@@ -58,8 +58,8 @@ public class Utils {
         ActionDao actionDao = getDaoSession(context).getActionDao();
 
 
-        kidActivities.add(createKidActivity("Mycie zębów", "abc.png", 1));
-        kidActivities.add(createKidActivity("Zabawa z misiem", "abc.png", 2));
+        kidActivities.add(createKidActivity("Mycie zębów", "szczoteczka", 1));
+        kidActivities.add(createKidActivity("Zabawa z misiem", "mis", 2));
 
         for (KidActivity kidActivity : kidActivities) {
             kidActivityDao.insertOrReplace(kidActivity);
@@ -73,19 +73,19 @@ public class Utils {
             nfcDeviceDao.insertOrReplace(nfcDevice);
         }
 
-        actions.add(createAction("Weź szczoteczkę", "czynnosc_1", 1, kidActivities.get(0).getId()));
-        actions.add(createAction("Nałóż pastę", "czynnosc_1", 2, kidActivities.get(0).getId()));
-        actions.add(createAction("Szczotkuj zęby", "czynnosc_1", 3, kidActivities.get(0).getId()));
-        actions.add(createAction("Wypluj pastę", "czynnosc_1", 4, kidActivities.get(0).getId()));
-        actions.add(createAction("Wypłucz usta", "czynnosc_1", 5, kidActivities.get(0).getId()));
-        actions.add(createAction("Umyj i odłóż szczoteczkę", "czynnosc_1", 6, kidActivities.get(0).getId()));
+        actions.add(createAction("Weź szczoteczkę", "szczoteczka", 1, kidActivities.get(0).getId()));
+        actions.add(createAction("Nałóż pastę", "szczoteczka", 2, kidActivities.get(0).getId()));
+        actions.add(createAction("Szczotkuj zęby", "szczoteczka", 3, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypluj pastę", "szczoteczka", 4, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypłucz usta", "szczoteczka", 5, kidActivities.get(0).getId()));
+        actions.add(createAction("Umyj i odłóż szczoteczkę", "szczoteczka", 6, kidActivities.get(0).getId()));
 
-        actions.add(createAction("Zapytaj misia: czy dobrze się czujesz?", "czynnosc_2", 1, kidActivities.get(1).getId()));
-        actions.add(createAction("Miś odpowiada: boli mnie łapka", "czynnosc_2", 2, kidActivities.get(1).getId()));
-        actions.add(createAction("Przyklej misiowi plaster", "czynnosc_2", 3, kidActivities.get(1).getId()));
-        actions.add(createAction("Zapytaj misia: czy teraz jest lepiej?", "czynnosc_2", 4, kidActivities.get(1).getId()));
-        actions.add(createAction("Miś odpowiada: Tak. Dziękuję.", "czynnosc_2", 5, kidActivities.get(1).getId()));
-        actions.add(createAction("Przytul misia", "czynnosc_2", 6, kidActivities.get(1).getId()));
+        actions.add(createAction("Zapytaj misia: czy dobrze się czujesz?", "mis", 1, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: boli mnie łapka", "mis", 2, kidActivities.get(1).getId()));
+        actions.add(createAction("Przyklej misiowi plaster", "mis", 3, kidActivities.get(1).getId()));
+        actions.add(createAction("Zapytaj misia: czy teraz jest lepiej?", "mis", 4, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: Tak. Dziękuję.", "mis", 5, kidActivities.get(1).getId()));
+        actions.add(createAction("Przytul misia", "mis", 6, kidActivities.get(1).getId()));
 
         for (Action action : actions) {
             actionDao.insertOrReplace(action);

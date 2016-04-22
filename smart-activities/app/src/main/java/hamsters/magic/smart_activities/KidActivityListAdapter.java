@@ -2,6 +2,7 @@ package hamsters.magic.smart_activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,15 +45,11 @@ public class KidActivityListAdapter extends ArrayAdapter<KidActivity> {
 
         KidActivity kidActivityOnPosition  = kidActivityList.get(position);
         name.setText(kidActivityOnPosition.getName());
-        InputStream stream = null;
-        try {
-            stream = context.getResources().getAssets().open(kidActivityOnPosition.getImgUrl());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Drawable myDrawable = Drawable.createFromStream(stream, null);
-        img.setImageDrawable(myDrawable);
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier(kidActivityOnPosition.getImgUrl(), "drawable", context.getPackageName());
+        img.setImageResource(resourceId);
         return rowView;
+
     }
 
     @Override
