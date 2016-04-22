@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,6 +57,11 @@ public class KidActivityListAdapter extends ArrayAdapter<KidActivity> {
     @Override
     public int getCount(){
         return this.kidActivityList.size();
+    }
+
+    @Override
+    public KidActivity getItem(int position){
+        return this.kidActivityList.get(position);
     }
 
 

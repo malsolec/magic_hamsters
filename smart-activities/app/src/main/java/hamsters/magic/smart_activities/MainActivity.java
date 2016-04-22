@@ -1,5 +1,7 @@
 package hamsters.magic.smart_activities;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,12 +10,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import junit.framework.Test;
 
 import java.util.List;
+
+import database.Action;
+import database.KidActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,9 +42,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpActivitiesListContent() {
-        ListView activityListView  = (ListView) findViewById(R.id.activities_list);
+        final ListView activityListView  = (ListView) findViewById(R.id.activities_list);
         KidActivityListAdapter kidActivityListAdapter = new KidActivityListAdapter(this.getApplicationContext());
         activityListView.setAdapter(kidActivityListAdapter);
+
+        activityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                getIntent().setAction(null);
+                Intent intent = new Intent(MainActivity.this, ActionActivity.class);
+                KidActivity selectedAction = (KidActivity) activityListView.getAdapter().getItem(position);
+                intent.putExtra("ACTIVITY_ID", selectedAction.getId());
+                MainActivity.this.startActivity(intent);
+            }});
     }
 
     @Override
