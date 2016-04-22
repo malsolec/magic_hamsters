@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ManagerActionMapper">
+
+    <resultMap id="managerActionResult" type="ManagerAction">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="imgUrl" column="img_url"/>
+        <result property="orderNumber" column="order_number"/>
+        <result property="kidActivityId" column="kid_activity_id"/>
+    </resultMap>
+
+    <select id="selectAllManagerActions" resultMap="managerActionResult">
+        SELECT *
+        FROM manager_action
+    </select>
+
+    <select id="selectManagerActionById" resultMap="managerActionResult">
+        SELECT *
+        FROM manager_action
+        WHERE id = #{value}
+    </select>
+
+    <insert id="insertManagerAction" parameterType="ManagerAction">
+        INSERT INTO manager_action (name, img_url, order_number, kid_activity_id)
+        VALUES (#{name}, #{imgUrl}, #{orderNumber}, #{kidActivityId})
+
+        <selectKey order="AFTER" keyProperty="id" resultType="int" >
+            SELECT currval('manager_action_id_seq');
+        </selectKey>
+    </insert>
+
+    <delete id="deleteManagerAction" parameterType="ManagerAction">
+        DELETE FROM manager_action
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
