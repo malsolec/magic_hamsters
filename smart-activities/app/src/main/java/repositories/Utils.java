@@ -69,7 +69,7 @@ public class Utils {
 
         nfcDevices.add(createNFCDevice(28, kidActivities.get(0).getId()));
         nfcDevices.add(createNFCDevice(4, kidActivities.get(1).getId()));
-        nfcDevices.add(createNFCDevice(30, kidActivities.get(2).getId()));
+        nfcDevices.add(createNFCDevice(-193, kidActivities.get(2).getId()));
 
         for (NFCDevice nfcDevice : nfcDevices) {
             nfcDeviceDao.insertOrReplace(nfcDevice);

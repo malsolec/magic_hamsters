@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void handleIntent(Intent intent) {
         String action = intent.getAction();
-        Log.d(NfcConstants.TAG, action);
+//        Log.d(NfcConstants.TAG, action);
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
             String type = intent.getType();
             if (NfcConstants.MIME_TEXT_PLAIN.equals(type)) {
