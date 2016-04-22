@@ -58,8 +58,8 @@ public class Utils {
         ActionDao actionDao = getDaoSession(context).getActionDao();
 
 
-        kidActivities.add(createKidActivity("Mycie zębów", "./img/mycie_zebow.jpg", 1));
-        kidActivities.add(createKidActivity("Zabawa z misiem", "./img/zabawa_z_misiem.jpg", 2));
+        kidActivities.add(createKidActivity("Mycie zębów", "abc.png", 1));
+        kidActivities.add(createKidActivity("Zabawa z misiem", "abc.png", 2));
 
         for (KidActivity kidActivity : kidActivities) {
             kidActivityDao.insertOrReplace(kidActivity);
