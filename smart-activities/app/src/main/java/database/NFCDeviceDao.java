@@ -27,7 +27,7 @@ public class NFCDeviceDao extends AbstractDao<NFCDevice, Long> {
     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
-        public final static Property DeviceId = new Property(1, String.class, "deviceId", false, "DEVICE_ID");
+        public final static Property DeviceId = new Property(1, Integer.class, "deviceId", false, "DEVICE_ID");
         public final static Property KidActivityId = new Property(2, Long.class, "kidActivityId", false, "KID_ACTIVITY_ID");
     };
 
@@ -48,7 +48,7 @@ public class NFCDeviceDao extends AbstractDao<NFCDevice, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'NFCDEVICE' (" + //
                 "'_id' INTEGER PRIMARY KEY ," + // 0: id
-                "'DEVICE_ID' TEXT," + // 1: deviceId
+                "'DEVICE_ID' INTEGER," + // 1: deviceId
                 "'KID_ACTIVITY_ID' INTEGER);"); // 2: kidActivityId
     }
 
@@ -68,9 +68,9 @@ public class NFCDeviceDao extends AbstractDao<NFCDevice, Long> {
             stmt.bindLong(1, id);
         }
  
-        String deviceId = entity.getDeviceId();
+        Integer deviceId = entity.getDeviceId();
         if (deviceId != null) {
-            stmt.bindString(2, deviceId);
+            stmt.bindLong(2, deviceId);
         }
  
         Long kidActivityId = entity.getKidActivityId();
@@ -96,7 +96,7 @@ public class NFCDeviceDao extends AbstractDao<NFCDevice, Long> {
     public NFCDevice readEntity(Cursor cursor, int offset) {
         NFCDevice entity = new NFCDevice( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // deviceId
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // deviceId
             cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2) // kidActivityId
         );
         return entity;
@@ -106,7 +106,7 @@ public class NFCDeviceDao extends AbstractDao<NFCDevice, Long> {
     @Override
     public void readEntity(Cursor cursor, NFCDevice entity, int offset) {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setDeviceId(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDeviceId(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
         entity.setKidActivityId(cursor.isNull(offset + 2) ? null : cursor.getLong(offset + 2));
      }
     

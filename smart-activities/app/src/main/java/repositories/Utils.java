@@ -66,14 +66,26 @@ public class Utils {
         }
 
 
-        nfcDevices.add(createNFCDevice("ABC", kidActivities.get(0).getId()));
-        nfcDevices.add(createNFCDevice("DEF", kidActivities.get(1).getId()));
+        nfcDevices.add(createNFCDevice(28, kidActivities.get(0).getId()));
+        nfcDevices.add(createNFCDevice(4, kidActivities.get(1).getId()));
 
         for (NFCDevice nfcDevice : nfcDevices) {
             nfcDeviceDao.insertOrReplace(nfcDevice);
         }
 
-        actions.add(createAction("Czynność 1", "./img/czynnosc_1", 1, kidActivities.get(0).getId()));
+        actions.add(createAction("Weź szczoteczkę", "czynnosc_1", 1, kidActivities.get(0).getId()));
+        actions.add(createAction("Nałóż pastę", "czynnosc_1", 2, kidActivities.get(0).getId()));
+        actions.add(createAction("Szczotkuj zęby", "czynnosc_1", 3, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypluj pastę", "czynnosc_1", 4, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypłucz usta", "czynnosc_1", 5, kidActivities.get(0).getId()));
+        actions.add(createAction("Umyj i odłóż szczoteczkę", "czynnosc_1", 6, kidActivities.get(0).getId()));
+
+        actions.add(createAction("Zapytaj misia: czy dobrze się czujesz?", "czynnosc_2", 1, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: boli mnie łapka", "czynnosc_2", 2, kidActivities.get(1).getId()));
+        actions.add(createAction("Przyklej misiowi plaster", "czynnosc_2", 3, kidActivities.get(1).getId()));
+        actions.add(createAction("Zapytaj misia: czy teraz jest lepiej?", "czynnosc_2", 4, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: Tak. Dziękuję.", "czynnosc_2", 5, kidActivities.get(1).getId()));
+        actions.add(createAction("Przytul misia", "czynnosc_2", 6, kidActivities.get(1).getId()));
 
         for (Action action : actions) {
             actionDao.insertOrReplace(action);
@@ -88,7 +100,7 @@ public class Utils {
         return kidActivity;
     }
 
-    public static NFCDevice createNFCDevice(String deviceId, Long kidActivityId) {
+    public static NFCDevice createNFCDevice(Integer deviceId, Long kidActivityId) {
         NFCDevice nfcDevice = new NFCDevice();
         nfcDevice.setDeviceId(deviceId);
         nfcDevice.setKidActivityId(kidActivityId);

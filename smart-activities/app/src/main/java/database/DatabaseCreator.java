@@ -32,7 +32,7 @@ public class DatabaseCreator {
     private static Entity action;
 
     public static void main(String[] args) throws Exception {
-        schema = new Schema(12, "database");
+        schema = new Schema(13, "database");
         createKidActivity();
         createNFCDevice();
         createAction();
@@ -50,7 +50,7 @@ public class DatabaseCreator {
     private static void createNFCDevice() {
         NFCDevice = schema.addEntity("NFCDevice");
         NFCDevice.addIdProperty();
-        NFCDevice.addStringProperty("deviceId");
+        NFCDevice.addIntProperty("deviceId");
 
         Property kidActivityId = NFCDevice.addLongProperty("kidActivityId").getProperty();
         NFCDevice.addToOne(kidActivity, kidActivityId);

@@ -42,7 +42,7 @@ public class KidActivityRepository {
         return kidActivityDao.loadAll();
     }
 
-    public static List<KidActivity> getKidActivitiesByNFCDeviceId(Context context, String deviceId) {
+    public static List<KidActivity> getKidActivitiesByNFCDeviceId(Context context, Integer deviceId) {
         DaoSession daoSession = Utils.getDaoSession(context);
         KidActivityDao kidActivityDao = daoSession.getKidActivityDao();
         QueryBuilder qb = kidActivityDao.queryBuilder();
