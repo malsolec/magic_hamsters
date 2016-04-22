@@ -17,6 +17,7 @@ import java.util.ListIterator;
 import database.Action;
 import database.KidActivity;
 import repositories.ActionRepository;
+import repositories.KidActivityRepository;
 
 /**
  * Created by Gosia on 2016-04-22.
@@ -61,6 +62,7 @@ public class ActionActivity extends AppCompatActivity {
             getWindow().getDecorView().findViewById(android.R.id.content).invalidate();
         }
         else{
+            KidActivityRepository.setKidActivityIsDone(this.getApplicationContext(), kidActivityId, true);
             getIntent().setAction(null);
             Intent intent = new Intent(ActionActivity.this, MainActivity.class);
             ActionActivity.this.startActivity(intent);

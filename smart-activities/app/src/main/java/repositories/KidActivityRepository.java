@@ -51,17 +51,18 @@ public class KidActivityRepository {
         return qb.list();
     }
 
-    public static void setKidActivityIsDone(Context context, KidActivity kidActivity, boolean isDone) {
+    public static void setKidActivityIsDone(Context context, Long kidActivityId, boolean isDone) {
         DaoSession daoSession = Utils.getDaoSession(context);
-        kidActivity.setIsDone(isDone);
         KidActivityDao kidActivityDao = daoSession.getKidActivityDao();
+        KidActivity kidActivity = getKidActivityById(context, kidActivityId);
+        kidActivity.setIsDone(isDone);
         kidActivityDao.update(kidActivity);
     }
 
     public static void undoneAllKidActivities(Context context) {
         List<KidActivity> kidActivities = getAllKidsActivities(context);
         for(KidActivity kidActivity : kidActivities) {
-            setKidActivityIsDone(context, kidActivity, false);
+            setKidActivityIsDone(context, kidActivity.getId(), false);
         }
     }
 
