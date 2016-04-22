@@ -60,6 +60,7 @@ public class Utils {
 
         kidActivities.add(createKidActivity("Mycie zębów", "szczoteczka", 1));
         kidActivities.add(createKidActivity("Zabawa z misiem", "mis", 2));
+        kidActivities.add(createKidActivity("Kodowanie", "koduj", 3));
 
         for (KidActivity kidActivity : kidActivities) {
             kidActivityDao.insertOrReplace(kidActivity);
@@ -68,24 +69,30 @@ public class Utils {
 
         nfcDevices.add(createNFCDevice(28, kidActivities.get(0).getId()));
         nfcDevices.add(createNFCDevice(4, kidActivities.get(1).getId()));
+        nfcDevices.add(createNFCDevice(30, kidActivities.get(2).getId()));
 
         for (NFCDevice nfcDevice : nfcDevices) {
             nfcDeviceDao.insertOrReplace(nfcDevice);
         }
 
-        actions.add(createAction("Weź szczoteczkę", "szczoteczka", 1, kidActivities.get(0).getId()));
-        actions.add(createAction("Nałóż pastę", "szczoteczka", 2, kidActivities.get(0).getId()));
-        actions.add(createAction("Szczotkuj zęby", "szczoteczka", 3, kidActivities.get(0).getId()));
-        actions.add(createAction("Wypluj pastę", "szczoteczka", 4, kidActivities.get(0).getId()));
-        actions.add(createAction("Wypłucz usta", "szczoteczka", 5, kidActivities.get(0).getId()));
-        actions.add(createAction("Umyj i odłóż szczoteczkę", "szczoteczka", 6, kidActivities.get(0).getId()));
+        actions.add(createAction("Weź szczoteczkę", "szczoteczka_duza", 1, kidActivities.get(0).getId()));
+        actions.add(createAction("Nałóż pastę", "szczoteczka_duza", 2, kidActivities.get(0).getId()));
+        actions.add(createAction("Szczotkuj zęby", "szczoteczka_duza", 3, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypluj pastę", "szczoteczka_duza", 4, kidActivities.get(0).getId()));
+        actions.add(createAction("Wypłucz usta", "szczoteczka_duza", 5, kidActivities.get(0).getId()));
+        actions.add(createAction("Umyj i odłóż szczoteczkę", "szczoteczka_duza", 6, kidActivities.get(0).getId()));
 
-        actions.add(createAction("Zapytaj misia: czy dobrze się czujesz?", "mis", 1, kidActivities.get(1).getId()));
-        actions.add(createAction("Miś odpowiada: boli mnie łapka", "mis", 2, kidActivities.get(1).getId()));
-        actions.add(createAction("Przyklej misiowi plaster", "mis", 3, kidActivities.get(1).getId()));
-        actions.add(createAction("Zapytaj misia: czy teraz jest lepiej?", "mis", 4, kidActivities.get(1).getId()));
-        actions.add(createAction("Miś odpowiada: Tak. Dziękuję.", "mis", 5, kidActivities.get(1).getId()));
-        actions.add(createAction("Przytul misia", "mis", 6, kidActivities.get(1).getId()));
+        actions.add(createAction("Zapytaj misia: czy dobrze się czujesz?", "mis_duzy", 1, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: boli mnie łapka", "mis_duzy", 2, kidActivities.get(1).getId()));
+        actions.add(createAction("Przyklej misiowi plaster", "mis_duzy", 3, kidActivities.get(1).getId()));
+        actions.add(createAction("Zapytaj misia: czy teraz jest lepiej?", "mis_duzy", 4, kidActivities.get(1).getId()));
+        actions.add(createAction("Miś odpowiada: Tak. Dziękuję.", "mis_duzy", 5, kidActivities.get(1).getId()));
+        actions.add(createAction("Przytul misia", "mis_duzy", 6, kidActivities.get(1).getId()));
+
+        actions.add(createAction("Włącz komputer", "koduj_duzy", 1, kidActivities.get(2).getId()));
+        actions.add(createAction("Odpal IDE", "koduj_duzy", 2, kidActivities.get(2).getId()));
+        actions.add(createAction("Uratuj świat", "koduj_duzy", 3, kidActivities.get(2).getId()));
+        actions.add(createAction("Możesz włączyć koty na youtube", "koduj_duzy", 4, kidActivities.get(2).getId()));
 
         for (Action action : actions) {
             actionDao.insertOrReplace(action);
